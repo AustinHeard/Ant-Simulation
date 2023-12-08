@@ -6,7 +6,7 @@ function setup() {
 	utility = new Utility();
 	environment = new Environment();
 	FoodList = environment.spawnFood(config.numberOfFood);
-	Ants = environment.spawnAnts(config.numberOfAnts );
+	Ants = environment.spawnAnts(config.numberOfAnts);
 }
 
 function draw() {

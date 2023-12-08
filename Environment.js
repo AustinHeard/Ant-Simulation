@@ -2,7 +2,9 @@ class Environment {
 	constructor() {
 		createCanvas(config.canvasSize, config.canvasSize);
 	}
+
 	/**
+	 * Spawns the number of food passed in to the function
 	 * @param {int} numberToSpawn
 	 * @returns {Ant[]} Array of Food
 	 */
@@ -11,6 +13,7 @@ class Environment {
 	}
 
 	/**
+	 * Spawns the number of ants passed in to the function
 	 * @param {int} numberToSpawn
 	 * @returns {Ant[]} Array of Ants
 	 */
@@ -19,6 +22,7 @@ class Environment {
 	}
 
 	/**
+	 * Generic function to spawn entities
 	 * @param {int} numberToSpawn
 	 * @param {string} type Food | Ant
 	 * @returns {Food[]|Ant[]} Array of Ants
@@ -41,7 +45,8 @@ class Environment {
 	}
 
 	/**
-	 * @param {Food} food The food to be removed
+	 * Removes passed food from the FoodList
+	 * @param {Food} food
 	 */
 	removeFood(food) {
 		var index = FoodList.indexOf(food)

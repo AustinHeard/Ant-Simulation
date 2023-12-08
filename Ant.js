@@ -90,8 +90,8 @@ class Ant {
 		return [this.x,this.location[1]];
 	}
 
+	// TODO: show number of Ants
 	/**
-	 * TODO: Refactor for readability.
 	 * Makes ant follow the mouse cursor
 	 */
 	followMouse() {
@@ -134,6 +134,9 @@ class Ant {
 
 	}
 
+	/**
+	 * Keeps the ant from wandering off of the canvas
+	 */
 	keepOnMap() {
 		this.padding = this.diameter / 2 + 5
 		if (this.location[0] >= width - this.padding) {
@@ -149,6 +152,10 @@ class Ant {
 		this.move(this.location[0] += this.direction[0] * this.movementSpeed, this.location[1] += this.direction[1] * this.movementSpeed)
 	}
 
+	/**
+	 * Makes the ant eat a piece of food
+	 * @param {Food} food
+	 */
 	eatFood(food) {
 		// TODO: if food is within the fov of the ant go to the food and eat it/pick it up and bring it back to the colony
 		environment.removeFood(food);
@@ -156,6 +163,9 @@ class Ant {
 
 	}
 
+	/**
+	 * Makes the ant check if there is food in its vision circle
+	 */
 	senseFood() {
 		let sightRange = this.diameter * 3
 		fill(128)
@@ -175,11 +185,17 @@ class Ant {
 		*/
 	}
 
+	/**
+	 * Makes the ant lay pheromones as it walks
+	 */
 	layPheromones() {
 		// TODO: every ant should always be laying pheromones behind it. The ant should weigh the paths with more pheromones on them higher when trying to search for food
 
 	}
 
+	/**
+	 * Makes it so that two ants can't be on top of each other
+	 */
 	avoidAnts() {
 		// TODO: Make it so that the ants don't crash into each other
 	}
