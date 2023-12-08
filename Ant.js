@@ -150,9 +150,7 @@ class Ant {
 	}
 
 	eatFood(food) {
-		/**
-		 * TODO: if food is within the fov of the ant go to the food and eat it/pick it up and bring it back to the colony
-		 */
+		// TODO: if food is within the fov of the ant go to the food and eat it/pick it up and bring it back to the colony
 		environment.removeFood(food);
 		console.log("Food Eaten: ");
 
@@ -178,15 +176,11 @@ class Ant {
 	}
 
 	layPheromones() {
-		/**
-		 * TODO: every ant should always be laying pheromones behind it. The ant should weigh the paths with more pheromones on them higher when trying to search for food
-		 */
+		// TODO: every ant should always be laying pheromones behind it. The ant should weigh the paths with more pheromones on them higher when trying to search for food
 
 	}
 
 	avoidAnts() {
-		/**
-		 * TODO: Make it so that the ants don't crash into each other
-		 */
+		// TODO: Make it so that the ants don't crash into each other
 	}
 }

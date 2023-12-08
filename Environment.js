@@ -40,6 +40,9 @@ class Environment {
 		return entityArray
 	}
 
+	/**
+	 * @param {Food} food The food to be removed
+	 */
 	removeFood(food) {
 		var index = FoodList.indexOf(food)
 

@@ -10,11 +10,6 @@ class Utility {
 		return 5
 	}
 
-	/**
-	 * TODO: show number of food
-	 */
-
-	/**
-	 * TODO: show number of Ants
-	 */
+	// TODO: show number of food
+	// TODO: show number of Ants
 }
