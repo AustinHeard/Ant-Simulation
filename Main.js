@@ -1,10 +1,5 @@
 let Ants, FoodList, utility, environment, config;
 
-/**
- * TODO: add config function or class
- */
-let numberOfFood = 20
-let numberOfAnts = 10
 
 function setup() {
 	config = new Config();
@@ -15,7 +10,7 @@ function setup() {
 }
 
 function draw() {
-	background(150);
+	background(config.backgroundColor);
 
 
 	Ants.forEach(ant => {
