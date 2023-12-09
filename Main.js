@@ -26,6 +26,8 @@ function draw() {
 
 
 	utility.showFrameRate();
+	utility.showNumberAnts();
+	utility.showNumberFood();
 }
 
 function keyPressed() {
