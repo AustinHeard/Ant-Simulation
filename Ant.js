@@ -6,6 +6,10 @@ class Ant {
 	 */
 	constructor(x, y) {
 		this.diameter = config.diameter;
+		this.radius = this.diameter / 2;
+
+		this.sightDiameter = this.diameter * 3
+		this.sightRadius = this.sightDiameter / 2
 
 		this.location = [x,y]
 		/**
@@ -166,22 +170,18 @@ class Ant {
 	 * Makes the ant check if there is food in its vision circle
 	 */
 	senseFood() {
-		let sightRange = this.diameter * 3
 		fill(128)
-		circle(this.location[0], this.location[1], sightRange)
+		circle(this.location[0], this.location[1], this.sightDiameter)
 
-		// TODO: If food is in the circle go and eat the food
-		/*
-		FoodList.foreach(food => {
-			if (food.x is within circle && food.y is within circle) {
-				walk to the food so the ant is intersecting the food
-				then
-				this.eatFood(food)
-				then
-				return home on weighted graph of pheromones
+		// TODO: Walk to food before eating it
+		// TODO: Return home on weighted graph of pheromones
+		FoodList.forEach(food => {
+			if (dist(food.location[0], food.location[1], this.location[0], this.location[1]) < this.sightRadius + food.radius) {
+				console.log("Food: X: " + food.location[0] + " Y: " + food.location[1]);
+				console.log("Ant: X: " + this.location[0] + " Y: " + this.location[1]);
+				this.eatFood(food);
 			}
-		})
-		*/
+		});
 	}
 
 	/**
