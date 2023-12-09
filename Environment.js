@@ -31,6 +31,7 @@ class Environment {
 
 		let entityArray = [];
 
+		// TODO: spawn both food and ants _ pixels from the edge of the canvas
 		for (let index = 0; index < numberToSpawn; index++) {
 			if (type === "Food") {
 				// TODO: spawn food clumpier
