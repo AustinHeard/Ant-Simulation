@@ -6,6 +6,7 @@ class Food {
 	 */
 	constructor(x, y) {
 		this.diameter = config.diameter;
+		this.radius = this.diameter / 2;
 
 		this.location = [x,y];
 	}
