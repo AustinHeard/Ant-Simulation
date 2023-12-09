@@ -90,7 +90,6 @@ class Ant {
 		return [this.x,this.location[1]];
 	}
 
-	// TODO: show number of Ants
 	/**
 	 * Makes ant follow the mouse cursor
 	 */
