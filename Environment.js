@@ -1,6 +1,7 @@
 class Environment {
 	constructor() {
 		createCanvas(config.canvasSize, config.canvasSize);
+		frameRate(config.frameRate);
 	}
 
 	/**
@@ -34,7 +35,7 @@ class Environment {
 		// TODO: spawn both food and ants _ pixels from the edge of the canvas
 		for (let index = 0; index < numberToSpawn; index++) {
 			if (type === "Food") {
-				// TODO: spawn food clumpier
+				// TODO: spawn food clumpier, test if organizing the food in a list of clumps and then lists of food in each clump makes it run faster
 				// TODO: make it so that food can't spawn on top of a food that is already there
 				entityArray[index] = new Food(Math.random()*width, Math.random()*height)
 			} else if (type === "Ant") {
