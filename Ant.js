@@ -176,6 +176,7 @@ class Ant {
 		// TODO: Walk to food before eating it
 		// TODO: Return home on weighted graph of pheromones
 
+		// TODO: Implement clump pruning
 		// With clumpy food, I can prune clumps and won't have to loop through every food. Should be faster ?
 		ClumpList.forEach(Clump => {
 			Clump.foods.forEach(food => {
