@@ -1,7 +1,7 @@
 class Config {
 	constructor() {
 		this.diameter = 5;
-		this.clumpiness = 25;
+		this.clumpiness = 100;
 
 		/**
 		 * Ants - 500
@@ -9,7 +9,7 @@ class Config {
 		 * 9 FPS before food clumping
 		 */
 		// this.numberOfAnts = 40;
-		this.numberOfAnts = 600;
+		this.numberOfAnts = 100;
 		// this.numberOfFood = 400;
 		this.numberOfFood = 600;
 

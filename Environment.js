@@ -10,21 +10,37 @@ class Environment {
 	 * @returns {Clump[][]} Array of Clumps full of food
 	 */
 	spawnFood(numberToSpawn) {
-		let FoodArray = [];
-		let clumps = numberToSpawn * Math.random();
+		let clumpArray = [];
+		// TODO: get clumps per numberToSpawn equation right
+		let clumps = 10;
+		// let clumps = Math.round(numberToSpawn / (numberToSpawn * Math.random()));
 		let foodPerClump = Math.round(numberToSpawn/clumps);
+
+		console.log(clumps);
 
 		// TODO: spawn both food and ants _ pixels from the edge of the canvas
 		// TODO: make it so that food can't spawn on top of a food that is already there
 		// TODO: make it so that clumps can't spawn on top of each other or to close to each other
+		// TODO: figure out why the clumps are squares
 		for (let i = 0; i < clumps; i++) {
-			FoodArray[i] = new Clump(Math.random()*width, Math.random()*height);
+			clumpArray[i] = new Clump(Math.random()*width, Math.random()*height);
 			for (let j = 0; j < foodPerClump; j++) {
-				FoodArray[i].foods.push(new Food(utility.getRandomInt(FoodArray[i].location[0] - FoodArray[i].clumpinessRadius, FoodArray[i].location[0] + FoodArray[i].clumpinessRadius), utility.getRandomInt(FoodArray[i].location[1] - FoodArray[i].clumpinessRadius, FoodArray[i].location[1] + FoodArray[i].clumpinessRadius)))
+				clumpArray[i].foods.push(
+					new Food(
+						utility.getRandomInt(
+							clumpArray[i].location[0] - clumpArray[i].clumpinessRadius,
+							clumpArray[i].location[0] + clumpArray[i].clumpinessRadius
+						),
+						utility.getRandomInt(
+							clumpArray[i].location[1] - clumpArray[i].clumpinessRadius,
+							clumpArray[i].location[1] + clumpArray[i].clumpinessRadius
+						)
+					)
+				)
 			}
-			// FoodArray[index] = new Food(Math.random()*width, Math.random()*height)
 		}
-		return FoodArray
+		console.log(clumpArray);
+		return clumpArray
 	}
 
 	/**
