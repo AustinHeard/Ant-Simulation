@@ -10,13 +10,12 @@ class Utility {
 		text("FPS: "+round(fps), width - 100, 50);
 	}
 
-	// TODO: show number of food
 	showNumberFood() {
 		fill(256);
 		textSize(20);
 		text("Number of Food: "+FoodList.length, width - 200, 100)
 	}
-	// TODO: show number of Ants
+
 	showNumberAnts() {
 		fill(256);
 		textSize(20);
