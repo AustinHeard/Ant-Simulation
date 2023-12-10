@@ -162,7 +162,7 @@ class Ant {
 	eatFood(food) {
 		// TODO: if food is within the fov of the ant go to the food and eat it/pick it up and bring it back to the colony
 		environment.removeFood(food);
-		console.log("Food Eaten: ");
+		// console.log("Food Eaten: ");
 
 	}
 
@@ -175,12 +175,14 @@ class Ant {
 
 		// TODO: Walk to food before eating it
 		// TODO: Return home on weighted graph of pheromones
-		FoodList.forEach(food => {
-			if (dist(food.location[0], food.location[1], this.location[0], this.location[1]) < this.sightRadius + food.radius) {
-				console.log("Food: X: " + food.location[0] + " Y: " + food.location[1]);
-				console.log("Ant: X: " + this.location[0] + " Y: " + this.location[1]);
-				this.eatFood(food);
-			}
+
+		// With clumpy food, I can prune clumps and won't have to loop through every food. Should be faster ?
+		ClumpList.forEach(Clump => {
+			Clump.foods.forEach(food => {
+				if (dist(food.location[0], food.location[1], this.location[0], this.location[1]) < this.sightRadius + food.radius) {
+					this.eatFood(food);
+				}
+			})
 		});
 	}
 

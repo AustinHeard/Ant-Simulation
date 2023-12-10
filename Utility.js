@@ -13,10 +13,10 @@ class Utility {
 	/**
 	 * Show number of Food in the top right corner
 	 */
-	showNumberFood() {
+	showNumberClumps() {
 		fill(256);
 		textSize(20);
-		text("Number of Food: "+FoodList.length, width - 200, 100)
+		text("Number of Clumps: "+ ClumpList.length, width - 200, 100)
 	}
 
 	/**
@@ -25,6 +25,15 @@ class Utility {
 	showNumberAnts() {
 		fill(256);
 		textSize(20);
-		text("Number of Ants: "+Ants.length, width - 200, 75)
+		text("Number of Ants: "+ Ants.length, width - 200, 75)
+	}
+
+	/**
+	 * Get Random Int between min and max inclusive
+	 */
+	getRandomInt(min, max) {
+		min = Math.ceil(min);
+		max = Math.floor(max);
+		return Math.floor(Math.random() * (max - min + 1)) + min;
 	}
 }
