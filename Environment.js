@@ -21,22 +21,22 @@ class Environment {
 		// TODO: spawn both food and ants _ pixels from the edge of the canvas
 		// TODO: make it so that food can't spawn on top of a food that is already there
 		// TODO: make it so that clumps can't spawn on top of each other or to close to each other
-		// TODO: figure out why the clumps are squares
+		// TODO: figure out why the clumps are squares why just why
 		for (let i = 0; i < clumps; i++) {
 			clumpArray[i] = new Clump(Math.random()*width, Math.random()*height);
 			for (let j = 0; j < foodPerClump; j++) {
 				clumpArray[i].foods.push(
 					new Food(
-						utility.getRandomInt(
+						utility.getRandomInRange(
 							clumpArray[i].location[0] - clumpArray[i].clumpinessRadius,
 							clumpArray[i].location[0] + clumpArray[i].clumpinessRadius
 						),
-						utility.getRandomInt(
+						utility.getRandomInRange(
 							clumpArray[i].location[1] - clumpArray[i].clumpinessRadius,
 							clumpArray[i].location[1] + clumpArray[i].clumpinessRadius
 						)
 					)
-				)
+				);
 			}
 		}
 		console.log(clumpArray);
