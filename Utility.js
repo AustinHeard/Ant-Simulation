@@ -30,8 +30,20 @@ class Utility {
 
 	/**
 	 * Get Random Int between min and max inclusive
+	 * @param {number} min
+	 * @param {number} max
 	 */
 	getRandomInRange(min, max) {
 		return Math.random() * (max - min + 1) + min;
+	}
+
+	/**
+	 * Clamp a number between the min and max
+	 * @param {number} num
+	 * @param {number} min
+	 * @param {number} max
+	 */
+	clamp(num, min, max) {
+		return Math.min(Math.max(num, min), max);
 	}
 }

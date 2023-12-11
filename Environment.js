@@ -23,7 +23,14 @@ class Environment {
 		// TODO: make it so that clumps can't spawn on top of each other or to close to each other
 		// TODO: figure out why the clumps are squares why just why
 		for (let i = 0; i < clumps; i++) {
-			clumpArray[i] = new Clump(Math.random()*width, Math.random()*height);
+			clumpArray[i] = new Clump(
+				utility.clamp(
+					Math.random()*width, config.clumpiness, width - config.clumpiness
+				),
+				utility.clamp(
+					Math.random()*height, config.clumpiness, height - config.clumpiness
+				)
+			);
 			for (let j = 0; j < foodPerClump; j++) {
 				clumpArray[i].foods.push(
 					new Food(
