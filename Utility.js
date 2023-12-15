@@ -16,7 +16,7 @@ class Utility {
 	showNumberClumps() {
 		fill(256);
 		textSize(20);
-		text("Number of Clumps: "+ ClumpList.length, width - 210, 100)
+		text("Number of Clumps: "+ ClumpList.length, width - 210, 100);
 	}
 
 	/**
@@ -25,8 +25,18 @@ class Utility {
 	showNumberAnts() {
 		fill(256);
 		textSize(20);
-		text("Number of Ants: "+ Ants.length, width - 210, 75)
+		text("Number of Ants: "+ Ants.length, width - 210, 75);
 	}
+
+  showNumberFood() {
+    var foodNumber = 0;
+    ClumpList.forEach(clump => {
+      foodNumber += clump.foods.length
+    });
+		fill(256);
+		textSize(20);
+		text("Number of Food: "+ foodNumber, width - 210, 125);
+  }
 
 	/**
 	 * Get Random Int between min and max inclusive
@@ -55,4 +65,8 @@ class Utility {
 	clamp(num, min, max) {
 		return Math.min(Math.max(num, min), max);
 	}
+
+  dist(arr1, arr2) {
+    return dist(arr1[0], arr1[1], arr2[0], arr2[1])
+  }
 }

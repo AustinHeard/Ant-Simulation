@@ -19,13 +19,10 @@ function draw() {
 		ant.senseFood();
 		ant.show();
 	});
-	// console.log(ClumpList);
+
 	ClumpList.forEach(clump => {
-		// console.log(clump);
 		for (let index = 0; index < clump.length; index++) {
-			console.log(clump);
 			let food = clump[index];
-			console.log(food);
 			food.show();
 		}
 		clump.show();
@@ -35,6 +32,7 @@ function draw() {
 	utility.showFrameRate();
 	utility.showNumberAnts();
 	utility.showNumberClumps();
+	utility.showNumberFood();
 }
 
 function keyPressed() {
