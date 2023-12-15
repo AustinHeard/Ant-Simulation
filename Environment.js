@@ -21,32 +21,33 @@ class Environment {
 		// TODO: spawn both food and ants _ pixels from the edge of the canvas
 		// TODO: make it so that food can't spawn on top of a food that is already there
 		// TODO: make it so that clumps can't spawn on top of each other or to close to each other
-		// TODO: figure out why the clumps are squares why just why
 		for (let i = 0; i < clumps; i++) {
-			clumpArray[i] = new Clump(
-				utility.clamp(
-					Math.random()*width, config.clumpiness, width - config.clumpiness
-				),
-				utility.clamp(
-					Math.random()*height, config.clumpiness, height - config.clumpiness
-				)
-			);
+      // Clamp clump position to a place far enough from the edge of the canvas where the whole clump will fit on the canvas
+      var clumpPositionY = utility.clamp(
+        utility.getRandomInt(0,height), config.clumpiness, height - config.clumpiness
+      )
+      var clumpPositionX = utility.clamp(
+        utility.getRandomInt(0,width), config.clumpiness, width - config.clumpiness
+      )
+
+			clumpArray[i] = new Clump(clumpPositionX, clumpPositionY);
+
 			for (let j = 0; j < foodPerClump; j++) {
-				clumpArray[i].foods.push(
-					new Food(
-						utility.getRandomInRange(
-							clumpArray[i].location[0] - clumpArray[i].clumpinessRadius,
-							clumpArray[i].location[0] + clumpArray[i].clumpinessRadius
-						),
-						utility.getRandomInRange(
-							clumpArray[i].location[1] - clumpArray[i].clumpinessRadius,
-							clumpArray[i].location[1] + clumpArray[i].clumpinessRadius
-						)
-					)
-				);
+        // Spawn food at a random location within the clump
+        var angle = utility.getRandomInt(0, 360)
+
+        var clumpFactorX = (Math.random() * clumpArray[i].clumpinessRadius) * sin(angle);
+        var clumpFactorY = (Math.random() * clumpArray[i].clumpinessRadius) * cos(angle);
+
+        var foodPositionX = clumpFactorX + clumpArray[i].location[0];
+        var foodPositionY = clumpFactorY + clumpArray[i].location[1];
+
+				clumpArray[i].foods.push(new Food(foodPositionX, foodPositionY));
 			}
 		}
+
 		console.log(clumpArray);
+
 		return clumpArray
 	}
 
@@ -58,7 +59,7 @@ class Environment {
 	spawnAnts(numberToSpawn) {
 		let AntArray = [];
 
-		// TODO: spawn both food and ants _ pixels from the edge of the canvas
+    //TODO: spawn all of the ants in the same spot so the graph can be implemented
 		for (let index = 0; index < numberToSpawn; index++) {
 			AntArray[index] = new Ant(Math.random()*width, Math.random()*height)
 		}
