@@ -7,7 +7,7 @@ class Utility {
 		let fps = frameRate();
 		fill(256)
 		textSize(20);
-		text("FPS: "+round(fps), width - 100, 50);
+		text("FPS: "+round(fps), width - 110, 50);
 	}
 
 	/**
@@ -16,7 +16,7 @@ class Utility {
 	showNumberClumps() {
 		fill(256);
 		textSize(20);
-		text("Number of Clumps: "+ ClumpList.length, width - 200, 100)
+		text("Number of Clumps: "+ ClumpList.length, width - 210, 100)
 	}
 
 	/**
@@ -25,7 +25,7 @@ class Utility {
 	showNumberAnts() {
 		fill(256);
 		textSize(20);
-		text("Number of Ants: "+ Ants.length, width - 200, 75)
+		text("Number of Ants: "+ Ants.length, width - 210, 75)
 	}
 
 	/**
