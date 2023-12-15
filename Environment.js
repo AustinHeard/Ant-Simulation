@@ -16,9 +16,8 @@ class Environment {
 		// let clumps = Math.round(numberToSpawn / (numberToSpawn * Math.random()));
 		let foodPerClump = Math.round(numberToSpawn/clumps);
 
-		console.log(clumps);
+		console.log("Number of Clumps:  " + clumps);
 
-		// TODO: spawn both food and ants _ pixels from the edge of the canvas
 		// TODO: make it so that food can't spawn on top of a food that is already there
 		// TODO: make it so that clumps can't spawn on top of each other or to close to each other
 		for (let i = 0; i < clumps; i++) {
