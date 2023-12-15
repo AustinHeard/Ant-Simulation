@@ -160,7 +160,6 @@ class Ant {
 	 * @param {Food} food
 	 */
 	eatFood(food) {
-		// TODO: if food is within the fov of the ant go to the food and eat it/pick it up and bring it back to the colony
 		environment.removeFood(food);
 		// console.log("Food Eaten: ");
 

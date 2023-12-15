@@ -12,7 +12,7 @@ function setup() {
 function draw() {
 	background(config.backgroundColor);
 
-	// TODO: Sense food is tanking performance
+	// NOTE: Sense food is tanking performance
 	Ants.forEach(ant => {
 		ant.wander();
 		ant.keepOnMap();
