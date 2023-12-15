@@ -16,7 +16,6 @@ class Environment {
 
 		console.log("Number of Clumps:  " + clumps);
 
-		// TODO: make it so that clumps can't spawn on top of each other or to close to each other
 		for (let i = 0; i < clumps; i++) {
       // Clamp clump position to a place far enough from the edge of the canvas where the whole clump will fit on the canvas
       var clumpPositionY = utility.clamp(
@@ -25,20 +24,15 @@ class Environment {
       var clumpPositionX = utility.clamp(
         utility.getRandomInt(0,width), config.clumpiness, width - config.clumpiness
       )
-      var newClumpLocation = [clumpPositionX, clumpPositionY]
-      var clumpOverlapping = false;
 
-      for (let k = 0; k < clumpArray.length; k++) {
-        if (utility.dist(clumpArray[k].location, newClumpLocation) < config.clumpPadding) {
-          console.log('CLUMPS ARE OVERLAPPING!!!');
-          clumpOverlapping = true;
-        }
-      }
+      // Make sure that clumps aren't overlapping
+      var newClumpPosition = [clumpPositionX, clumpPositionY]
 
-      if (!clumpOverlapping) {
+      if (!utility.overlapping(clumpArray, newClumpPosition, config.clumpiness + config.clumpPadding)) {
         clumpArray[i] = new Clump(clumpPositionX, clumpPositionY);
       } else {
-        // if food is overlapping try to make that food again until it is not overlapping another food
+        // if Clump is overlapping try to make that Clump again until it is not overlapping any other Clumps
+        console.log('CLUMPS ARE OVERLAPPING!!!');
         i--;
         continue
       }
@@ -55,19 +49,12 @@ class Environment {
 
         // Make sure that the food isn't overlapping in the clump
         var foodPosition = [foodPositionX, foodPositionY]
-        var foodOverlapping = false;
 
-        for (let k = 0; k < clumpArray[i].foods.length; k++) {
-          if (utility.dist(clumpArray[i].foods[k].location, foodPosition) < config.diameter) {
-            console.log('FOOD IS OVERLAPPING!!!');
-            foodOverlapping = true;
-          }
-        }
-
-        if (!foodOverlapping) {
+        if (!utility.overlapping(clumpArray[i].foods, foodPosition, config.diameter)) {
           clumpArray[i].foods.push(new Food(foodPositionX, foodPositionY));
         } else {
-          // if food is overlapping try to make that food again until it is not overlapping another food
+          // if two food are overlapping try to make that food again until it is not overlapping another food
+          console.log('FOOD IS OVERLAPPING!!!');
           j--;
         }
 			}

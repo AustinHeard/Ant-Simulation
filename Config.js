@@ -3,7 +3,7 @@ class Config {
 		this.diameter = 5;
 
 		this.clumpiness = 60;
-    this.clumpPadding = 150;
+    this.clumpPadding = 40;
     this.foodPerClump = 50;
 
 		/**
@@ -14,7 +14,7 @@ class Config {
     // Benchmark numbers
 		// this.numberOfAnts = 500;
 		// this.numberOfFood = 500;
-		this.numberOfAnts = 20;
+		this.numberOfAnts = 0;
 		this.numberOfFood = 500;
 
 		this.canvasSize = 900;

@@ -69,4 +69,22 @@ class Utility {
   dist(arr1, arr2) {
     return dist(arr1[0], arr1[1], arr2[0], arr2[1])
   }
+
+  /**
+   * Checks if the entity is overlapping with any of the things in the array
+   * @param {Array} array
+   * @param {Array} entity
+   * @param {Number} size
+   */
+  overlapping(array, entity, size) {
+    var overlapping = false;
+
+    for (let i = 0; i < array.length; i++) {
+      if (this.dist(array[i].location, entity) < size) {
+        overlapping = true;
+      }
+    }
+
+    return overlapping
+  }
 }
