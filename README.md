@@ -1,3 +1,31 @@
+
+# Benchmarking
+
+	1. Before clumping and clump pruning
+		* diameter - 5
+		* Ants - 500
+		* Food - 500
+		* 9 FPS
+	2. After clumping and clump pruning
+		* diameter - 5
+		* Ants - 500
+		* Food - 500
+		* 59 FPS
+
+		* diameter - 1
+		* Ants - 1000
+		* Food - 1000
+		* 24 FPS
+
+		* diameter - 1
+		* Ants - 2000
+		* Food - 2000
+		* 8 FPS
+
+
+
+
+
 TODO:
 	1. Ant
 		A. figure out if picture of an ant or primitives is faster/looks better

@@ -178,12 +178,14 @@ class Ant {
 		// TODO: Implement clump pruning
 		// With clumpy food, I can prune clumps and won't have to loop through every food. Should be faster ?
 		ClumpList.forEach(Clump => {
-			Clump.foods.forEach(food => {
-				if (utility.dist(food.location, this.location) < this.sightRadius + food.radius) {
-					this.eatFood(food);
-				}
-			})
-		});
+      if (utility.dist(Clump.location, this.location) < (config.clumpiness + config.clumpPadding)) {
+        Clump.foods.forEach(food => {
+          if (utility.dist(food.location, this.location) < this.sightRadius + food.radius) {
+            this.eatFood(food);
+          }
+        })
+      }
+    });
 	}
 
 	/**
