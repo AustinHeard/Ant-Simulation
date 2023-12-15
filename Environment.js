@@ -41,8 +41,8 @@ class Environment {
         // Spawn food at a random location within the clump
         var randAngle = utility.getRandomInt(0, 360);
 
-        var clumpFactorX = (Math.random() * clumpArray[i].clumpinessRadius) * sin(randAngle);
-        var clumpFactorY = (Math.random() * clumpArray[i].clumpinessRadius) * cos(randAngle);
+        var clumpFactorX = (Math.random() * config.clumpinessRadius) * sin(randAngle);
+        var clumpFactorY = (Math.random() * config.clumpinessRadius) * cos(randAngle);
 
         var foodPositionX = clumpFactorX + clumpArray[i].location[0];
         var foodPositionY = clumpFactorY + clumpArray[i].location[1];
