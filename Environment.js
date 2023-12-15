@@ -25,8 +25,23 @@ class Environment {
       var clumpPositionX = utility.clamp(
         utility.getRandomInt(0,width), config.clumpiness, width - config.clumpiness
       )
+      var newClumpLocation = [clumpPositionX, clumpPositionY]
+      var clumpOverlapping = false;
 
-			clumpArray[i] = new Clump(clumpPositionX, clumpPositionY);
+      for (let k = 0; k < clumpArray.length; k++) {
+        if (utility.dist(clumpArray[k].location, newClumpLocation) < config.clumpPadding) {
+          console.log('CLUMPS ARE OVERLAPPING!!!');
+          clumpOverlapping = true;
+        }
+      }
+
+      if (!clumpOverlapping) {
+        clumpArray[i] = new Clump(clumpPositionX, clumpPositionY);
+      } else {
+        // if food is overlapping try to make that food again until it is not overlapping another food
+        i--;
+        continue
+      }
 
 			for (let j = 0; j < config.foodPerClump; j++) {
         // Spawn food at a random location within the clump
@@ -40,16 +55,16 @@ class Environment {
 
         // Make sure that the food isn't overlapping in the clump
         var foodPosition = [foodPositionX, foodPositionY]
-        var overlapping = false;
+        var foodOverlapping = false;
 
         for (let k = 0; k < clumpArray[i].foods.length; k++) {
           if (utility.dist(clumpArray[i].foods[k].location, foodPosition) < config.diameter) {
-            console.log('CRICLES ARE OVERLAPPING!!!');
-            overlapping = true;
+            console.log('FOOD IS OVERLAPPING!!!');
+            foodOverlapping = true;
           }
         }
 
-        if (!overlapping) {
+        if (!foodOverlapping) {
           clumpArray[i].foods.push(new Food(foodPositionX, foodPositionY));
         } else {
           // if food is overlapping try to make that food again until it is not overlapping another food

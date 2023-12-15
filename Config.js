@@ -3,6 +3,7 @@ class Config {
 		this.diameter = 5;
 
 		this.clumpiness = 60;
+    this.clumpPadding = 150;
     this.foodPerClump = 50;
 
 		/**
