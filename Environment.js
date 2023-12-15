@@ -10,6 +10,9 @@ class Environment {
 	 * @returns {Clump[][]} Array of Clumps full of food
 	 */
 	spawnFood(numberToSpawn) {
+
+    // TODO: Maybe rewrite the spawn clumps part of the function into its own function for readability
+
 		let clumpArray = [];
 		// TODO: Change this so that it can spawn clumps that don't have to have 50 food in it
 		let clumps = Math.ceil(numberToSpawn / config.foodPerClump);

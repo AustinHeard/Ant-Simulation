@@ -51,7 +51,6 @@ class Ant {
 		this.direction = [0,0];
 
 		this.movementSpeed = this.diameter / 20;
-		// this.movementSpeed = 2;
 
 		this.steps = 0;
 		this.wanderTime = 1;
@@ -161,7 +160,6 @@ class Ant {
 	 */
 	eatFood(food) {
 		environment.removeFood(food);
-		// console.log("Food Eaten: ");
 
 	}
 
@@ -199,6 +197,7 @@ class Ant {
 	 * Makes it so that two ants can't be on top of each other
 	 */
 	avoidAnts() {
-		// TODO: Make it so that the ants don't crash into each other
+		// TODO: Make it so that the ants don't crash into each other after the first couple seconds. This might be really annoying for coming and going from start
 	}
+
 }

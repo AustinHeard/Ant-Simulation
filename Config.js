@@ -17,16 +17,17 @@ class Config {
     console.log("foodPerClump: " + this.foodPerClump);
     console.log("----------------");
 
-    // Benchmark numbers
-    // this.diameter = 1;
-		// this.numberOfAnts = 2000;
-		// this.numberOfFood = 2000;
-
 		this.numberOfAnts = 20;
 		this.numberOfFood = 500;
 
 		this.canvasSize = 900;
 		this.frameRate = 60;
 		this.backgroundColor = 150;
+
+
+    // Benchmark numbers
+    // this.diameter = 1;
+		// this.numberOfAnts = 2000;
+		// this.numberOfFood = 2000;
 	}
 }

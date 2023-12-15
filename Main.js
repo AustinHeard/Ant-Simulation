@@ -9,10 +9,12 @@ function setup() {
 	Ants = environment.spawnAnts(config.numberOfAnts);
 }
 
+// TODO: Start trying to implement graph stuff
+
+
 function draw() {
 	background(config.backgroundColor);
 
-	// NOTE: Sense food is tanking performance
 	Ants.forEach(ant => {
 		ant.wander();
 		ant.keepOnMap();
