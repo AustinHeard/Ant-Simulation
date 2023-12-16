@@ -53,7 +53,7 @@ class Ant {
 		this.movementSpeed = this.diameter / 20;
 
 		this.steps = 0;
-		this.wanderTime = 1;
+		this.wanderTime = utility.getRandomInRange(0.5, 2);
 		this.wanderability = .50;
 
 		this.UP = [0,-1];
@@ -175,6 +175,7 @@ class Ant {
 
 		// With clumpy food, I can prune clumps and won't have to loop through every food. Should be faster ?
 		ClumpList.forEach(Clump => {
+      // Don't search through all of the food in the clump if the clump is far away
       if (utility.dist(Clump.location, this.location) < (config.clumpiness + config.clumpPadding)) {
         Clump.foods.forEach(food => {
           if (utility.dist(food.location, this.location) < this.sightRadius + food.radius) {

@@ -78,7 +78,8 @@ class Environment {
 
     //TODO: spawn all of the ants in the same spot so the graph can be implemented
 		for (let index = 0; index < numberToSpawn; index++) {
-			AntArray[index] = new Ant(Math.random()*width, Math.random()*height)
+			AntArray[index] = new Ant(width - config.clumpPadding, height - config.clumpPadding)
+			// AntArray[index] = new Ant(width/2, height/2)
 		}
 
 		return AntArray

@@ -17,7 +17,7 @@ class Config {
     console.log("foodPerClump: " + this.foodPerClump);
     console.log("----------------");
 
-		this.numberOfAnts = 20;
+		this.numberOfAnts = 1;
 		this.numberOfFood = 500;
 
 		this.canvasSize = 900;
