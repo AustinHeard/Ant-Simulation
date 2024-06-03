@@ -1,45 +1,52 @@
-class Utility {
+import Food from "./Food.js";
+import Ant from "./Ant.js";
+
+export default class Utility {
+
+	constructor(p5) {
+		this.p5 = p5
+	}
 
 	/**
 	 * Shows the frame rate in the top right corner of the screen
 	 */
 	showFrameRate() {
     //TODO: only update framerate every couple or frames or every second
-		let fps = frameRate();
-		fill(256)
-		textSize(20);
-		text("FPS: "+round(fps), width - 110, 50);
+		let fps = this.p5.frameRate();
+		this.p5.fill(256)
+		this.p5.textSize(20);
+		this.p5.text("FPS: "+ this.p5.round(fps), this.p5.width - 110, 50);
 	}
 
 	/**
 	 * Show number of Clumps in the top right corner
 	 */
-	showNumberClumps() {
-		fill(256);
-		textSize(20);
-		text("Number of Clumps: "+ ClumpList.length, width - 210, 100);
+	showNumberClumps(ClumpList) {
+		this.p5.fill(256);
+		this.p5.textSize(20);
+		this.p5.text("Number of Clumps: "+ ClumpList.length, this.p5.width - 210, 100);
 	}
 
 	/**
 	 * Show number of Ants in the top right corner
 	 */
-	showNumberAnts() {
-		fill(256);
-		textSize(20);
-		text("Number of Ants: "+ Ants.length, width - 210, 75);
+	showNumberAnts(Ants) {
+		this.p5.fill(256);
+		this.p5.textSize(20);
+		this.p5.text("Number of Ants: "+ Ants.length, this.p5.width - 210, 75);
 	}
 
   /**
    * Shows the number of Food in the top right corner
    */
-  showNumberFood() {
+  showNumberFood(ClumpList) {
     var foodNumber = 0;
     ClumpList.forEach(clump => {
       foodNumber += clump.foods.length
     });
-		fill(256);
-		textSize(20);
-		text("Number of Food: "+ foodNumber, width - 210, 125);
+		this.p5.fill(256);
+		this.p5.textSize(20);
+		this.p5.text("Number of Food: "+ foodNumber, this.p5.width - 210, 125);
   }
 
 	/**
@@ -79,7 +86,7 @@ class Utility {
    * @returns
    */
   dist(arr1, arr2) {
-    return dist(arr1[0], arr1[1], arr2[0], arr2[1])
+    return this.p5.dist(arr1[0], arr1[1], arr2[0], arr2[1])
   }
 
   /**

@@ -1,11 +1,20 @@
-class Ant {
+import Utility from "./Utility.js";
+import Config from "./Config.js";
+import Environment from './Environment.js';
+
+export default class Ant {
 	/**
 	 * Creates an ant
 	 * @param {int} x x location start ant at
 	 * @param {int} y y location start ant at
 	 */
-	constructor(x, y) {
-		this.diameter = config.diameter;
+	constructor(p5, x, y) {
+		this.ClumpList;
+		this.environment = new Environment(p5);
+		this.p5 = p5;
+		this.config = new Config(p5);
+		this.utility = new Utility(p5);
+		this.diameter = this.config.diameter;
 		this.radius = this.diameter / 2;
 
 		this.sightDiameter = this.diameter * 3
@@ -53,7 +62,7 @@ class Ant {
 		this.movementSpeed = this.diameter / 20;
 
 		this.steps = 0;
-		this.wanderTime = utility.getRandomInRange(0.5, 2);
+		this.wanderTime = this.utility.getRandomInRange(0.5, 2);
 		this.wanderability = .50;
 
 		this.UP = [0,-1];
@@ -71,8 +80,8 @@ class Ant {
 	 * Displays the Ant on the screen
 	 */
 	show() {
-		fill(20);
-		circle(this.location[0], this.location[1], this.diameter);
+		this.p5.fill(20);
+		this.p5.circle(this.location[0], this.location[1], this.diameter);
 	}
 
 	/**
@@ -141,11 +150,11 @@ class Ant {
 	 */
 	keepOnMap() {
 		this.padding = this.diameter / 2 + 5
-		if (this.location[0] >= width - this.padding) {
+		if (this.location[0] >= this.p5.width - this.padding) {
 			this.direction = this.LEFT
 		} else if (this.location[0] <= 0 + this.padding) {
 			this.direction = this.RIGHT
-		} else if (this.location[1] >= height - this.padding) {
+		} else if (this.location[1] >= this.p5.height - this.padding) {
 			this.direction = this.UP
 		} else if (this.location[1] <= 0 + this.padding) {
 			this.direction = this.DOWN
@@ -159,26 +168,25 @@ class Ant {
 	 * @param {Food} food
 	 */
 	eatFood(food) {
-		environment.removeFood(food);
-
+		this.environment.removeFood(this.ClumpList, food);
 	}
 
 	/**
 	 * Makes the ant check if there is food in its vision circle
 	 */
-	senseFood() {
-		fill(128)
-		circle(this.location[0], this.location[1], this.sightDiameter)
+	senseFood(ClumpList) {
+		this.p5.fill(128)
+		this.p5.circle(this.location[0], this.location[1], this.sightDiameter)
 
 		// TODO: Walk to food before eating it
 		// TODO: Return home on weighted graph of pheromones
-
+		this.ClumpList = ClumpList
 		// With clumpy food, I can prune clumps and won't have to loop through every food. Should be faster ?
 		ClumpList.forEach(Clump => {
       // Don't search through all of the food in the clump if the clump is far away
-      if (utility.dist(Clump.location, this.location) < (config.clumpiness + config.clumpPadding)) {
+      if (this.utility.dist(Clump.location, this.location) < (this.config.clumpiness + this.config.clumpPadding)) {
         Clump.foods.forEach(food => {
-          if (utility.dist(food.location, this.location) < this.sightRadius + food.radius) {
+          if (this.utility.dist(food.location, this.location) < this.sightRadius + food.radius) {
             this.eatFood(food);
           }
         })
@@ -191,7 +199,6 @@ class Ant {
 	 */
 	layPheromones() {
 		// TODO: every ant should always be laying pheromones behind it. The ant should weigh the paths with more pheromones on them higher when trying to search for food
-
 	}
 
 	/**

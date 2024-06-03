@@ -1,0 +1,22 @@
+{
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "ant-simulation",
+  "description": "",
+  "version": "1.0.0",
+  "main": "Server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AustinHeard/Ant-Simulation.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AustinHeard/Ant-Simulation/issues"
+  },
+  "homepage": "https://github.com/AustinHeard/Ant-Simulation#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

@@ -1,7 +1,16 @@
-class Environment {
-	constructor() {
-		createCanvas(config.canvasSize, config.canvasSize);
-		frameRate(config.frameRate);
+import Config from "./Config.js";
+import Utility from "./Utility.js";
+import Clump from "./Clump.js";
+import Food from "./Food.js";
+import Ant from "./Ant.js";
+
+export default class Environment {
+	constructor(p5) {
+		this.p5 = p5
+		this.config = new Config(p5);
+		this.utility = new Utility(p5);
+		p5.createCanvas(this.config.canvasSize, this.config.canvasSize);
+		p5.frameRate(this.config.frameRate);
 	}
 
 	/**
@@ -15,24 +24,24 @@ class Environment {
 
 		let clumpArray = [];
 		// TODO: Change this so that it can spawn clumps that don't have to have 50 food in it
-		let clumps = Math.ceil(numberToSpawn / config.foodPerClump);
+		let clumps = Math.ceil(numberToSpawn / this.config.foodPerClump);
 
 		console.log("Number of Clumps:  " + clumps);
 
 		for (let i = 0; i < clumps; i++) {
       // Clamp clump position to a place far enough from the edge of the canvas where the whole clump will fit on the canvas
-      var clumpPositionY = utility.clamp(
-        utility.getRandomInt(0,height), config.clumpiness, height - config.clumpiness
+      var clumpPositionY = this.utility.clamp(
+        this.utility.getRandomInt(0,this.p5.height), this.config.clumpiness, this.p5.height - this.config.clumpiness
       )
-      var clumpPositionX = utility.clamp(
-        utility.getRandomInt(0,width), config.clumpiness, width - config.clumpiness
+      var clumpPositionX = this.utility.clamp(
+        this.utility.getRandomInt(0,this.p5.width), this.config.clumpiness, this.p5.width - this.config.clumpiness
       )
 
       // Make sure that clumps aren't overlapping
       var newClumpPosition = [clumpPositionX, clumpPositionY]
 
-      if (!utility.overlapping(clumpArray, newClumpPosition, config.clumpiness + config.clumpPadding)) {
-        clumpArray[i] = new Clump(clumpPositionX, clumpPositionY);
+      if (!this.utility.overlapping(clumpArray, newClumpPosition, this.config.clumpiness + this.config.clumpPadding)) {
+        clumpArray[i] = new Clump(this.p5, clumpPositionX, clumpPositionY);
       } else {
         // if Clump is overlapping try to make that Clump again until it is not overlapping any other Clumps
         console.log('CLUMPS ARE OVERLAPPING!!!');
@@ -40,12 +49,12 @@ class Environment {
         continue
       }
 
-			for (let j = 0; j < config.foodPerClump; j++) {
+			for (let j = 0; j < this.config.foodPerClump; j++) {
         // Spawn food at a random location within the clump
-        var randAngle = utility.getRandomInt(0, 360);
+        var randAngle = this.utility.getRandomInt(0, 360);
 
-        var clumpFactorX = (Math.random() * config.clumpinessRadius) * sin(randAngle);
-        var clumpFactorY = (Math.random() * config.clumpinessRadius) * cos(randAngle);
+        var clumpFactorX = (Math.random() * this.config.clumpinessRadius) * this.p5.sin(randAngle);
+        var clumpFactorY = (Math.random() * this.config.clumpinessRadius) * this.p5.cos(randAngle);
 
         var foodPositionX = clumpFactorX + clumpArray[i].location[0];
         var foodPositionY = clumpFactorY + clumpArray[i].location[1];
@@ -53,8 +62,8 @@ class Environment {
         // Make sure that the food isn't overlapping in the clump
         var foodPosition = [foodPositionX, foodPositionY]
 
-        if (!utility.overlapping(clumpArray[i].foods, foodPosition, config.diameter)) {
-          clumpArray[i].foods.push(new Food(foodPositionX, foodPositionY));
+        if (!this.utility.overlapping(clumpArray[i].foods, foodPosition, this.config.diameter)) {
+          clumpArray[i].foods.push(new Food(this.p5, foodPositionX, foodPositionY));
         } else {
           // if two food are overlapping try to make that food again until it is not overlapping another food
           console.log('FOOD IS OVERLAPPING!!!');
@@ -78,7 +87,7 @@ class Environment {
 
     //TODO: spawn all of the ants in the same spot so the graph can be implemented
 		for (let index = 0; index < numberToSpawn; index++) {
-			AntArray[index] = new Ant(width - config.clumpPadding, height - config.clumpPadding)
+			AntArray[index] = new Ant(this.p5, this.p5.width - this.config.clumpPadding, this.p5.height - this.config.clumpPadding)
 			// AntArray[index] = new Ant(width/2, height/2)
 		}
 
@@ -97,9 +106,9 @@ class Environment {
 
 		for (let index = 0; index < numberToSpawn; index++) {
 			if (type === "Food") {
-				entityArray[index] = new Food(Math.random()*width, Math.random()*height)
+				entityArray[index] = new Food(Math.random()*this.p5.width, Math.random()*this.p5.height)
 			} else if (type === "Ant") {
-				entityArray[index] = new Ant(Math.random()*width, Math.random()*height)
+				entityArray[index] = new Ant(Math.random()*this.p5.width, Math.random()*this.p5.height)
 			}
 		}
 
@@ -110,7 +119,7 @@ class Environment {
 	 * Removes passed food from the FoodList
 	 * @param {Food} food
 	 */
-	removeFood(food) {
+	removeFood(ClumpList, food) {
 		ClumpList.forEach(Clump => {
 			var index = Clump.foods.indexOf(food)
 			if (index != -1){

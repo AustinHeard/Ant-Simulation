@@ -1,2 +1,5 @@
 p5js/
 .DS_Store
+*node_modules/*
+node_modules
+public/p5js/
