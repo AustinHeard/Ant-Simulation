@@ -3,18 +3,17 @@ import Config from './Config.js';
 import Environment from './Environment.js';
 import Utility from './Utility.js';
 
-let Ants, ClumpList, utility, environment, config, graph;
+let utility, environment, config, graph, Ants;
 
+let NodeNumber = 0
 
 new p5(function(p5) {
 	p5.setup = function() {
-		graph = new Graph();
+		graph = new Graph(p5);
 		utility = new Utility(p5);
 		environment = new Environment(p5);
 		config = new Config(p5);
-		ClumpList = environment.spawnFood(config.numberOfFood);
 		Ants = environment.spawnAnts(config.numberOfAnts);
-
 	}
 
 	// TODO: Start trying to implement graph stuff
@@ -23,24 +22,17 @@ new p5(function(p5) {
 		p5.background(config.backgroundColor);
 
 		Ants.forEach(ant => {
+			if (p5.frameCount % config.nodeRate == 0) {
+				ant.addNode(graph, NodeNumber)
+				NodeNumber = NodeNumber + 1
+			}
 			ant.wander();
 			ant.keepOnMap();
-			ant.senseFood(ClumpList);
 			ant.show();
 		});
 
-		ClumpList.forEach(clump => {
-			for (let index = 0; index < clump.length; index++) {
-				let food = clump[index];
-				food.show();
-			}
-			clump.show();
-		})
-
+		graph.show()
 
 		utility.showFrameRate();
-		utility.showNumberAnts(Ants);
-		utility.showNumberClumps(ClumpList);
-		utility.showNumberFood(ClumpList);
 	}
 });

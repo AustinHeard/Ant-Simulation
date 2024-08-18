@@ -1,3 +1,5 @@
+import GraphNode from "./GraphNode.js";
+
 export default class Config {
 	constructor(p5) {
 		this.diameter = 5;
@@ -17,12 +19,18 @@ export default class Config {
     // console.log("foodPerClump: " + this.foodPerClump);
     // console.log("----------------");
 
-		this.numberOfAnts = 100;
+		this.numberOfAnts = 1;
 		this.numberOfFood = 500;
 
 		this.canvasSize = 900;
 		this.frameRate = 60;
 		this.backgroundColor = 150;
+
+    // framecount % nodeRate = frequency of new nodes added to graph in seconds
+    this.nodeRate = 60
+    this.defaultEdgeWeight = 10
+
+    this.originNode = new GraphNode(p5, 0, 860, 860)
 
 
     // Benchmark numbers

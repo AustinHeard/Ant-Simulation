@@ -3,6 +3,8 @@ import Utility from "./Utility.js";
 import Clump from "./Clump.js";
 import Food from "./Food.js";
 import Ant from "./Ant.js";
+import GraphNode from "./GraphNode.js";
+
 
 export default class Environment {
 	constructor(p5) {
@@ -84,10 +86,11 @@ export default class Environment {
 	 */
 	spawnAnts(numberToSpawn) {
 		let AntArray = [];
+		// let originNode = new GraphNode(this.p5, 0, this.p5.width - this.config.clumpPadding, this.p5.height - this.config.clumpPadding)
 
     //TODO: spawn all of the ants in the same spot so the graph can be implemented
 		for (let index = 0; index < numberToSpawn; index++) {
-			AntArray[index] = new Ant(this.p5, this.p5.width - this.config.clumpPadding, this.p5.height - this.config.clumpPadding)
+			AntArray[index] = new Ant(this.p5, this.p5.width - this.config.clumpPadding, this.p5.height - this.config.clumpPadding, this.config.originNode)
 			// AntArray[index] = new Ant(width/2, height/2)
 		}
 

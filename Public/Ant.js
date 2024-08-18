@@ -1,6 +1,7 @@
 import Utility from "./Utility.js";
 import Config from "./Config.js";
 import Environment from './Environment.js';
+import GraphNode from "./GraphNode.js";
 
 export default class Ant {
 	/**
@@ -8,7 +9,7 @@ export default class Ant {
 	 * @param {int} x x location start ant at
 	 * @param {int} y y location start ant at
 	 */
-	constructor(p5, x, y) {
+	constructor(p5, x, y, originNode) {
 		this.ClumpList;
 		this.environment = new Environment(p5);
 		this.p5 = p5;
@@ -59,11 +60,13 @@ export default class Ant {
 		 */
 		this.direction = [0,0];
 
-		this.movementSpeed = this.diameter / 20;
-
+		this.movementSpeed = this.diameter / 10;
+		console.log(this.movementSpeed)
 		this.steps = 0;
-		this.wanderTime = this.utility.getRandomInRange(0.5, 2);
-		this.wanderability = .50;
+		this.wanderability = .05;
+
+		this.lastNode = 0;
+		this.originNode = originNode;
 
 		this.UP = [0,-1];
 		this.LEFT = [-1,0];
@@ -99,7 +102,7 @@ export default class Ant {
 	 * @returns {int[]} (x,y)
 	 */
 	getLocation() {
-		return [this.x,this.location[1]];
+		return [this.location[0],this.location[1]];
 	}
 
 	/**
@@ -111,7 +114,12 @@ export default class Ant {
 
 		this.direction = [Math.sign(currentLocation[0] - mouseLocation[0]) * -1, Math.sign(currentLocation[1] - mouseLocation[1]) * -1];
 
-		this.move(this.location[0] += this.direction[0] * this.movementSpeed, this.location[1] += this.direction[1] * this.movementSpeed)
+		this.location[0] += (this.direction[0] * this.movementSpeed)
+		this.location[1] += (this.direction[1] * this.movementSpeed)
+		// this.location[0] = Math.round(this.location[0])
+		// this.location[1] = Math.round(this.location[1])
+
+		this.move(this.location[0], this.location[1])
 	}
 
 	/**
@@ -119,8 +127,7 @@ export default class Ant {
 	 */
 	wander() {
 
-		if (Math.random() <= this.wanderability && this.steps >= this.wanderTime * 60) {
-			this.steps = 0
+		if (Math.random() <= this.wanderability) {
 			let random = Math.random()
 			if (random <= .125) {
 				this.direction = this.UP
@@ -140,8 +147,13 @@ export default class Ant {
 				this.direction = this.DOWN_RIGHT
 			}
 		}
-		this.steps += 1
-		this.move(this.location[0] += this.direction[0] * this.movementSpeed, this.location[1] += this.direction[1] * this.movementSpeed)
+
+		this.location[0] += (this.direction[0] * this.movementSpeed)
+		this.location[1] += (this.direction[1] * this.movementSpeed)
+		// this.location[0] = Math.round(this.location[0])
+		// this.location[1] = Math.round(this.location[1])
+
+		this.move(this.location[0], this.location[1])
 
 	}
 
@@ -160,7 +172,12 @@ export default class Ant {
 			this.direction = this.DOWN
 		}
 
-		this.move(this.location[0] += this.direction[0] * this.movementSpeed, this.location[1] += this.direction[1] * this.movementSpeed)
+		this.location[0] += (this.direction[0] * this.movementSpeed)
+		this.location[1] += (this.direction[1] * this.movementSpeed)
+		// this.location[0] = Math.round(this.location[0])
+		// this.location[1] = Math.round(this.location[1])
+
+		this.move(this.location[0], this.location[1])
 	}
 
 	/**
@@ -192,6 +209,17 @@ export default class Ant {
         })
       }
     });
+	}
+
+	addNode(graph, NodeNumber) {
+		let newNode = new GraphNode(this.p5, NodeNumber + 1, Math.round(this.location[0]), Math.round(this.location[1]));
+		if (NodeNumber == 0) {
+			graph.addNode(newNode, this.originNode)
+			this.lastNode = newNode
+		} else {
+			graph.addNode(newNode, this.lastNode)
+			this.lastNode = newNode
+		}
 	}
 
 	/**
